@@ -1,17 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[102]:
-
-
 # The true function
 def f_true(x):
     y = 6.0 * (np.sin(x + 2) + np.sin(2*x + 4))
     return y
-
-
-# In[103]:
-
 
 import numpy as np # For all our math needs
 n = 750 # Number of data points
@@ -20,11 +10,7 @@ B = X
 e = np.random.normal(0.0, 5.0, n) # Random Gaussian noise
 y = f_true(X) + e # True labels with noise
 
-
-# In[104]:
-
-
-import matplotlib.pyplot as plt # For all our plotting needs
+import matplotlib.pyplot as plt 
 plt.figure()
 # Plot the data
 plt.scatter(X, y, 12, marker='o')
@@ -33,19 +19,14 @@ x_true = np.arange(-7.5, 7.5, 0.05)
 y_true = f_true(x_true)
 plt.plot(x_true, y_true, marker='None', color='r')
 
-
-# In[105]:
-
-
-# scikit-learn has many tools and utilities for model selection
 from sklearn.model_selection import train_test_split
 tst_frac = 0.3 # Fraction of examples to sample for the test set
 val_frac = 0.1 # Fraction of examples to sample for the validation set
 
-# First, we use train_test_split to partition (X, y) into training and test sets
+# partition (X, y) into training and test sets
 X_trn, X_tst, y_trn, y_tst = train_test_split(X, y, test_size=tst_frac, random_state=42)
 
-# Next, we use train_test_split to further partition (X_trn, y_trn) into training and validation sets
+# further partition (X_trn, y_trn) into training and validation sets
 X_trn, X_val, y_trn, y_val = train_test_split(X_trn, y_trn, test_size=val_frac, random_state=42)
 
 # Plot the three subsets
@@ -54,11 +35,7 @@ plt.scatter(X_trn, y_trn, 12, marker='o', color='orange')
 plt.scatter(X_val, y_val, 12, marker='o', color='green')
 plt.scatter(X_tst, y_tst, 12, marker='o', color='blue')
 
-
-# In[106]:
-
-
-###1(a)
+###
 # X float(n, ): univariate data
 # d int: degree of polynomial
 def polynomial_transform(X, d):
@@ -71,22 +48,14 @@ def polynomial_transform(X, d):
     Phi = np.asarray(Phi)
     return Phi
 
-
-# In[107]:
-
-
-###1(b)
+###
 # Phi float(n, d): transformed data
 # y float(n, ): labels
 def train_model(Phi, y):
     w = (np.linalg.inv(Phi.T@Phi))@Phi.T@y
     return w
 
-
-# In[108]:
-
-
-###1(c)
+###
 # Phi float(n, d): transformed data
 # y float(n, ): labels
 # w float(d, ): linear regression model
@@ -98,10 +67,6 @@ def evaluate_model(Phi, y, w):
         sum = sum + value
     mean_sq_err = sum/n
     return mean_sq_err
-
-
-# In[114]:
-
 
 ###1(d)
 w = {} # Dictionary to store all the trained models
@@ -139,13 +104,6 @@ for d in range(9, 25, 3):
 plt.legend(['true'] + list(range(9, 25, 3)))
 plt.axis([-8, 8, -15, 15])
 
-
-# I would choose d=18 since it has the least test error and the most similar pattern of the graph to the true f(x).
-
-# In[110]:
-
-
-###2(a)
 # X float(n, ): univariate data
 # B float(n, ): basis functions
 # gamma float : standard deviation / scaling of radial basis kernel
@@ -160,11 +118,7 @@ def radial_basis_transform(X, B, gamma=0.1):
     Phi = np.asarray(Phi)
     return Phi
 
-
-# In[111]:
-
-
-###2(b)
+###
 # Phi float(n, d): transformed data
 # y float(n, ): labels
 # lam float : regularization parameter
@@ -172,11 +126,7 @@ def train_ridge_model(Phi, y, lam):
     w = np.linalg.inv(Phi.T@Phi+lam*np.identity(len(Phi)))@Phi.T@y
     return w
 
-
-# In[134]:
-
-
-###2(c)
+###
 # Phi float(n, d): transformed data
 # y float(n, ): labels
 # w float(d, ): linear regression model
@@ -214,14 +164,7 @@ plt.xticks(np.log10(exponent), fontsize=12)
 plt.legend(['Validation Error', 'Test Error'], fontsize=16)
 plt.axis([-3.5, 3.5, 0, 18])
 
-
-# From this plot, it seems both the validation & test error rate is the minimum at lambda=0.001 and increasing when lambda value is increased.
-# Therefore, 0.001 is the most ideal value of lambda.
-
-# In[122]:
-
-
-###2(d)
+###
 plt.figure()
 plt.plot(x_true, y_true, marker='None', linewidth=5, color='k')
 
@@ -233,9 +176,3 @@ for lam in exponent:
 
 plt.legend(['true'] + exponent)
 plt.axis([-8, 8, -15, 15])
-
-
-# This plot contains all the plots with different lambda values with the plot of true f(x) function.
-# The graph with Lambda=0.001 has the closest y values to the ones of true f(x).
-# The one with Lambda=1000 has the most dissimilar graph to the true f(x).
-# As lambda increases, the linearity of the model is decreasing.
