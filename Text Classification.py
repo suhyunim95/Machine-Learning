@@ -4,17 +4,18 @@ import numpy as np
 import glob
   
 # Folder Path - change path to run 
-path_spam = 'C:/Users/suhyu/Desktop/11th week/spam'
-path_ham = 'C:/Users/suhyu/Desktop/11th week/ham'
-path_mix = 'C:/Users/suhyu/Desktop/11th week/mix'
-path_train = 'C:/Users/suhyu/Desktop/11th week/train'
-path_test = 'C:/Users/suhyu/Desktop/11th week/test'
+path_spam = 'C:/Users/pam'
+path_ham = 'C:/Users/ham'
+path_mix = 'C:/Users/mix'
+path_train = 'C:/Users/train'
+path_test = 'C:/Users/test'
   
 each_spam = []
 each_ham = []
 voc_spam = []
 voc_ham = []
 voc_total = []
+
 # Hard limit on the number of iterations for updating W
 hard_limit = 5
 
@@ -153,7 +154,7 @@ def generate_matrix(path, stopwords):
 # Main
 if __name__ == '__main__':
     
-    ### #1 Naive Bayes
+    ### Naive Bayes
     # Iterate through all file in spam
     # Spam
     dic_spam = {}
@@ -197,7 +198,7 @@ if __name__ == '__main__':
     naive_bayes(path_test, unique_words_ham, unique_words_spam, unique_words_total, stopwords)
 
 
-    ### #2 Logistic Regression
+    ### Logistic Regression
     # Choose different lambda and nu values; 0.01, 0.05, 0.1
     nu_value = 0.01
     lambda_value = 0.01

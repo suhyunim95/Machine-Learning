@@ -1,5 +1,3 @@
-# CS 6375 Assignment 5
-
 from matplotlib import pyplot as io
 import numpy as np
 from sklearn.cluster import KMeans

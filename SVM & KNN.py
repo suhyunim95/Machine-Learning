@@ -1,7 +1,3 @@
-##### 1a #####
-# DO NOT EDIT THIS FUNCTION; IF YOU WANT TO PLAY AROUND WITH DATA GENERATION,
-# MAKE A COPY OF THIS FUNCTION AND THEN EDIT
-#
 import numpy as np
 from sklearn.datasets import make_moons
 from sklearn.model_selection import train_test_split
@@ -34,10 +30,6 @@ def generate_data(n_samples, tst_frac=0.2, val_frac=0.2):
     
     return (X_trn, y_trn), (X_val, y_val), (X_tst, y_tst)
 
-#
-# DO NOT EDIT THIS FUNCTION; IF YOU WANT TO PLAY AROUND WITH VISUALIZATION,
-# MAKE A COPY OF THIS FUNCTION AND THEN EDIT
-#
 def visualize(models, param, X, y):
     # Initialize plotting
     if len(models) % 3 == 0:
@@ -108,7 +100,6 @@ print('##### 1(a) #####')
 print('SVC Test Accuracy with the best C value =', 10**C_best, 'is', C_tstAccuracy)
 print(' ')
 
-##### 1b #####
 # Learn support vector classifiers with a radial-basis function kernel with
 # fixed C = 10.0 and different values of gamma
 gamma_range = np.arange(-2.0, 4.0, 1.0)
@@ -139,9 +130,8 @@ G_tstAccuracy = models[10**G_best].score(X_tst, y_tst)
 print('##### 1(b) #####')
 print('SVC Test Accuracy with the best gamma value =', 10**G_best, 'is', G_tstAccuracy)
 print(' ')
-##### 2 #####
-# Load the Breast Cancer Diagnosis data set; download the files from eLearning
-# CSV files can be read easily using np.loadtxt()
+
+# Load the Breast Cancer Diagnosis data set
 trn = np.loadtxt('wdbc_trn.csv', delimiter=',')
 val = np.loadtxt('wdbc_val.csv', delimiter=',')
 tst = np.loadtxt('wdbc_tst.csv', delimiter=',')
@@ -172,7 +162,6 @@ for C in C_values:
         n_trnErr[(C,G)] = 1-n_models[C,G].score(X_trn, y_trn)
         n_valErr[(C,G)] = 1-n_models[C,G].score(X_val, y_val)
 
-print('##### 2 #####')
 print('Training errors for different c and gamma values')
 print('(C,gamma)         Training Error rate')
 for key, value in n_trnErr.items():
@@ -190,7 +179,6 @@ n_C_tstAccuracy = n_models[n_CG_best].score(X_tst, y_tst)
 print('SVC Test Accuracy with the best C and G values =', n_CG_best, 'is', n_C_tstAccuracy)
 print(' ')
 
-##### 3 #####
 trnErr = []
 valErr = []
 
@@ -211,7 +199,6 @@ plt.xlabel('K')
 plt.ylabel('Error Rates')
 plt.legend(['Training Error', 'Validation Error'], fontsize=16)
 
-print('##### 3 #####')
 print('The minimum error rate with k =', k_values[valErr.index(min(valErr))], 'is', min(valErr))
 print(' ')
 
@@ -219,11 +206,3 @@ knn.fit(X_tst, y_tst)
 pred_tst = knn.predict(X_tst)
 tstErr = np.mean(pred_tst != y_tst)
 print('KNN Test Accuracy with best k = 5 is', 1-tstErr)
-
-
-
-
-
-
-
-
