@@ -1,7 +1,3 @@
-##### 1a #####
-# DO NOT EDIT THIS FUNCTION; IF YOU WANT TO PLAY AROUND WITH DATA GENERATION,
-# MAKE A COPY OF THIS FUNCTION AND THEN EDIT
-#
 import numpy as np
 from sklearn.datasets import make_moons
 from sklearn.model_selection import train_test_split
@@ -34,10 +30,6 @@ def generate_data(n_samples, tst_frac=0.2, val_frac=0.2):
     
     return (X_trn, y_trn), (X_val, y_val), (X_tst, y_tst)
 
-#
-# DO NOT EDIT THIS FUNCTION; IF YOU WANT TO PLAY AROUND WITH VISUALIZATION,
-# MAKE A COPY OF THIS FUNCTION AND THEN EDIT
-#
 def visualize(models, param, X, y):
     # Initialize plotting
     if len(models) % 3 == 0:
@@ -219,11 +211,3 @@ knn.fit(X_tst, y_tst)
 pred_tst = knn.predict(X_tst)
 tstErr = np.mean(pred_tst != y_tst)
 print('KNN Test Accuracy with best k = 5 is', 1-tstErr)
-
-
-
-
-
-
-
-
